@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String? title;
-  final Future<void> onPressed;
+  final VoidCallback onPressed;
 
   const ButtonWidget({
     required this.onPressed,
@@ -21,16 +21,14 @@ class ButtonWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-      onPressed: () {
-        onPressed;
-      },
+      onPressed: onPressed,
       child: Text(
         '$title',
         style: GoogleFonts.nunito(
           textStyle: const TextStyle(
             color: Colors.white,
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
           ),
         ),
       ),

@@ -12,7 +12,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LoginController controller = Get.put(LoginController());
+    AuthController controller = Get.put(AuthController());
 
     return Scaffold(
       body: Container(
@@ -57,6 +57,11 @@ class LoginScreen extends StatelessWidget {
                     ),
                     title: 'Password',
                     icons: const Icon(Icons.lock_outline_rounded),
+                    validator: Validatorless.multiple(
+                      [
+                        Validatorless.required('Silahkan Masukan Password'),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -86,8 +91,10 @@ class LoginScreen extends StatelessWidget {
                 ),
                 Center(
                   child: ButtonWidget(
-                    onPressed: controller.checkLogin(),
-                    title: 'login',
+                    onPressed: () async {
+                      await controller.onLogin();
+                    },
+                    title: 'Login',
                   ),
                 )
               ],
