@@ -16,5 +16,9 @@ class AppRoutes {
       name: _Paths.login,
       page: () => const LoginScreen(),
     ),
+    GetPage(
+      name: _Paths.register,
+      page: () => const RegisterScreen(),
+    )
   ];
 }

@@ -1,11 +1,10 @@
 import 'package:dummy_project_1/modules/auth/controllers/login_controller.dart';
-import 'package:dummy_project_1/modules/auth/widgets/header.dart';
-import 'package:dummy_project_1/widget/button.dart';
-import 'package:dummy_project_1/widget/textfield.dart';
+import 'package:dummy_project_1/modules/auth/widgets/login/login_bottom.dart';
+import 'package:dummy_project_1/modules/auth/widgets/login/login_firebase.dart';
+import 'package:dummy_project_1/modules/auth/widgets/login/login_form.dart';
+import 'package:dummy_project_1/modules/auth/widgets/login/login_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:validatorless/validatorless.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -20,83 +19,27 @@ class LoginScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Form(
             key: controller.formKey,
-            child: Column(
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const HeaderScreenLogin(),
-                const SizedBox(height: 5),
-                TextFieldWidget(
-                  controller: controller.emailFC,
-                  icons: const Icon(Icons.mail_outline_outlined),
-                  title: 'Masukan Email',
-                  validator: Validatorless.multiple(
-                    [
-                      Validatorless.required('Silahkan Masukan Email'),
-                      Validatorless.email('Masukkan Email Yang Valid'),
-                    ],
-                  ),
+                // header login
+                HeaderScreenLogin(),
+                SizedBox(height: 10),
+                // login WIth Api
+                LoginForm(),
+                SizedBox(height: 30),
+                Divider(
+                  indent: 20,
+                  endIndent: 20,
+                  thickness: 2,
+                  color: Colors.grey,
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Obx(
-                  () => TextFieldWidgetPassword(
-                    obscureText: controller.showPassword.value,
-                    controller: controller.passwordFC,
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        controller.showPassword.toggle();
-                      },
-                      icon: Icon(
-                        controller.showPassword.value
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: Colors.black,
-                      ),
-                    ),
-                    title: 'Password',
-                    icons: const Icon(Icons.lock_outline_rounded),
-                    validator: Validatorless.multiple(
-                      [
-                        Validatorless.required('Silahkan Masukan Password'),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      InkWell(
-                        onTap: () {},
-                        child: Text(
-                          'Lupa Password',
-                          style: GoogleFonts.nunito(
-                            textStyle: TextStyle(
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Center(
-                  child: ButtonWidget(
-                    onPressed: () async {
-                      await controller.onLogin();
-                    },
-                    title: 'Login',
-                  ),
-                )
+                SizedBox(height: 30),
+                // Firebase Login
+                LoginFirebase(),
+                SizedBox(height: 30),
+                LoginBottom(),
               ],
             ),
           ),

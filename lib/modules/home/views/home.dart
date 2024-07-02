@@ -12,6 +12,22 @@ class HomeScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text(
+            "Halaman HomePage",
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                controller.logoutGoogle();
+              },
+              icon: const Icon(
+                Icons.logout_outlined,
+              ),
+            ),
+          ],
+        ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
