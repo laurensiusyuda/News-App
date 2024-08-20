@@ -1,6 +1,6 @@
-import 'package:dummy_project_1/common/utils/storage_util.dart';
-import 'package:dummy_project_1/modules/auth/controllers/login_controller.dart';
+import 'package:dummy_project_1/modules/auth/controllers/auth_controller.dart';
 import 'package:dummy_project_1/routes/pages.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +9,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await StorageUtil.init();
   configLoading();
   Get.put(AuthController());
   runApp(const MyApp());
@@ -41,9 +40,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'NewsApp',
-      initialRoute: StorageUtil.readBool('isLoggedIn')
-          ? AppPages.home
-          : AppRoutes.initial,
+      initialRoute: FirebaseAuth.instance.currentUser == null
+          ? AppRoutes.initial
+          : AppPages.home,
       getPages: AppRoutes.pages,
       builder: EasyLoading.init(),
     );

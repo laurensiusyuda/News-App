@@ -1,8 +1,8 @@
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class HeaderScreenLogin extends StatelessWidget {
-  const HeaderScreenLogin({super.key});
+class HeaderForgotLogin extends StatelessWidget {
+  const HeaderForgotLogin({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class HeaderScreenLogin extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Masuk',
+            'Lupa Password',
             style: GoogleFonts.nunito(
               textStyle: const TextStyle(
                 fontSize: 26,
@@ -23,7 +23,7 @@ class HeaderScreenLogin extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'Tetap terinformasi dengan mudah. Masuk dan jelajahi dunia berita.',
+            'Silahkan masukan email yang sudah terdaftar.',
             style: GoogleFonts.nunito(
               textStyle: TextStyle(
                 fontSize: 14,

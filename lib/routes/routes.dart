@@ -19,6 +19,18 @@ class AppRoutes {
     GetPage(
       name: _Paths.register,
       page: () => const RegisterScreen(),
+    ),
+    GetPage(
+      name: _Paths.onboard,
+      page: () => const OnBoardScreen(),
+    ),
+    GetPage(
+      name: _Paths.emailverify,
+      page: () => const CheckEmailVerifSceen(),
+    ),
+    GetPage(
+      name: _Paths.forgotpassword,
+      page: () => const ForgotPasswordScreen(),
     )
   ];
 }

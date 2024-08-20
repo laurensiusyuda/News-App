@@ -1,25 +1,23 @@
-import 'package:dummy_project_1/routes/pages.dart';
+import 'package:dummy_project_1/modules/auth/controllers/auth_controller.dart';
 import 'package:dummy_project_1/widget/button.dart';
 import 'package:dummy_project_1/widget/textfield.dart';
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:dummy_project_1/modules/auth/controllers/auth_controller.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:validatorless/validatorless.dart';
 
-class LoginForm extends StatelessWidget {
-  const LoginForm({super.key});
+class RegisterForm extends StatelessWidget {
+  const RegisterForm({super.key});
 
   @override
   Widget build(BuildContext context) {
-    AuthController controller = Get.find();
+    AuthController controller = Get.put(AuthController());
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFieldWidget(
-          controller: controller.emailFC,
+          controller: controller.emailRegisterFC,
           icons: const Icon(Icons.mail_outline_outlined),
           title: 'Masukan Email',
           validator: Validatorless.multiple(
@@ -32,16 +30,16 @@ class LoginForm extends StatelessWidget {
         const SizedBox(height: 10),
         Obx(
           () => TextFieldWidgetPassword(
-            obscureText: controller.showPassword.value,
-            title: 'Password',
-            controller: controller.passwordFC,
-            icons: const Icon(Icons.lock_outline_rounded),
+            obscureText: controller.showPasswordRegister.value,
+            title: 'Masukan Password',
+            controller: controller.passwordRegisterFc,
+            icons: const Icon(Icons.lock_outline),
             suffixIcon: IconButton(
               onPressed: () {
-                controller.showPassword.toggle();
+                controller.showPasswordRegister.toggle();
               },
               icon: Icon(
-                controller.showPassword.value
+                controller.showPasswordRegister.value
                     ? Icons.visibility
                     : Icons.visibility_off,
                 color: Colors.black,
@@ -55,35 +53,41 @@ class LoginForm extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 5),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              InkWell(
-                onTap: () {
-                  Get.toNamed(AppPages.forgotpassword);
-                },
-                child: Text(
-                  'Lupa Password',
-                  style: GoogleFonts.nunito(
-                    textStyle: TextStyle(
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                ),
-              )
-            ],
+        const SizedBox(height: 10),
+        Obx(
+          () => TextFieldWidgetPassword(
+            obscureText: controller.showPasswordConfirmRegister.value,
+            title: 'Konfirmasi Password',
+            controller: controller.confirmPasswordFc,
+            icons: const Icon(Icons.lock_outline),
+            suffixIcon: IconButton(
+              onPressed: () {
+                controller.showPasswordConfirmRegister.toggle();
+              },
+              icon: Icon(
+                controller.showPasswordConfirmRegister.value
+                    ? Icons.visibility
+                    : Icons.visibility_off,
+                color: Colors.black,
+              ),
+            ),
+            validator: Validatorless.multiple(
+              [
+                Validatorless.required(
+                    'Silahkan Masukan Password Konfirmasi Password'),
+                Validatorless.compare(controller.passwordRegisterFc,
+                    'Konfirmasi Password Tidak Sama'),
+              ],
+            ),
           ),
         ),
-        const SizedBox(height: 25),
+        const SizedBox(height: 35),
         Center(
           child: ButtonWidget(
             onPressed: () {
-              controller.onLogin();
+              controller.onRegister();
             },
-            title: 'Login',
+            title: 'Register',
           ),
         ),
         const SizedBox(height: 30),

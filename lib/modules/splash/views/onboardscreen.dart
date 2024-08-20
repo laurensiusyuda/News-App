@@ -1,4 +1,5 @@
 import 'package:dummy_project_1/common/constant/directory_assest.dart';
+import 'package:dummy_project_1/modules/splash/controller/splashscreen_controller.dart';
 import 'package:dummy_project_1/routes/pages.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,6 +16,7 @@ class OnBoardScreen extends StatefulWidget {
 class _OnBoardScrennState extends State<OnBoardScreen> {
   @override
   Widget build(BuildContext context) {
+    SplashScreenController splashController = Get.put(SplashScreenController());
     return IntroductionScreen(
       key: GlobalKey<IntroductionScreenState>(),
       globalBackgroundColor: Colors.white,
@@ -60,7 +62,10 @@ class _OnBoardScrennState extends State<OnBoardScreen> {
           ),
         ),
       ],
-      onDone: () => Get.toNamed(AppPages.login),
+      onDone: () => {
+        splashController.completeOnBoard(),
+        Get.toNamed(AppPages.login),
+      },
       onSkip: () => Get.toNamed(AppPages.login),
       showSkipButton: true,
       showBackButton: false,

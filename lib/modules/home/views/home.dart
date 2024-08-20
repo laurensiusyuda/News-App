@@ -1,4 +1,4 @@
-import 'package:dummy_project_1/modules/auth/controllers/login_controller.dart';
+import 'package:dummy_project_1/modules/auth/controllers/auth_controller.dart';
 import 'package:dummy_project_1/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () {
-                controller.logoutGoogle();
+                controller.onlogout();
               },
               icon: const Icon(
                 Icons.logout_outlined,
@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
               ButtonWidget(
                 title: 'LogOut',
                 onPressed: () {
-                  controller.logout();
+                  controller.onlogout();
                 },
               ),
             ],

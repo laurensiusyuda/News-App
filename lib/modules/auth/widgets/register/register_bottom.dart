@@ -1,10 +1,9 @@
-import 'package:dummy_project_1/routes/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginBottom extends StatelessWidget {
-  const LoginBottom({super.key});
+class RegisterBottom extends StatelessWidget {
+  const RegisterBottom({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +16,10 @@ class LoginBottom extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
               onTap: () {
-                Get.toNamed(AppPages.register);
+                Get.back();
               },
               child: Text(
-                'Belum Memiliki Akun ?',
+                'Sudah Memiliki Akun ?',
                 style: GoogleFonts.nunito(
                   textStyle: TextStyle(
                     color: Colors.grey[600],
@@ -28,7 +27,7 @@ class LoginBottom extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          )
         ],
       ),
     );
