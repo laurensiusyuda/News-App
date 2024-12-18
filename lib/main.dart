@@ -1,3 +1,4 @@
+import 'package:dummy_project_1/firebase_options.dart';
 import 'package:dummy_project_1/modules/auth/controllers/auth_controller.dart';
 import 'package:dummy_project_1/routes/pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +9,9 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   configLoading();
   Get.put(AuthController());
   runApp(const MyApp());

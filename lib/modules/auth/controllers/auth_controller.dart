@@ -125,27 +125,45 @@ class AuthController extends GetxController {
   // * on forgot password
   Future<void> onForgotPassword() async {
     try {
+      cprint("Mulai proses reset password...");
+
       if (formKeyForgotPassword.currentState!.validate()) {
         EasyLoading.show(status: 'Loading...');
-        String email = emailForgotPassword.text;
-        List<String> signInMethods =
-            await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
-        if (signInMethods.isNotEmpty) {
-          await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-          EasyLoading.dismiss();
-          EasyLoading.showSuccess('Reset Password Berhasil',
-              duration: const Duration(seconds: 2));
-          Get.offAllNamed(AppPages.login);
-          emailForgotPassword.clear();
-        } else {
-          EasyLoading.dismiss();
-          EasyLoading.showError('Email tidak terdaftar. Silakan coba lagi.');
-          emailForgotPassword.clear();
-        }
+        String email =
+            emailForgotPassword.text.trim(); // Menghapus spasi ekstra
+        cprint("Mengirim permintaan reset password untuk email: $email");
+
+        // Mengirim email reset password
+        await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+
+        cprint("Email reset password telah dikirim.");
+        EasyLoading.dismiss();
+        EasyLoading.showSuccess('Reset password berhasil, periksa email Anda.',
+            duration: const Duration(seconds: 2));
+
+        // Mengalihkan pengguna kembali ke halaman login
+        Get.offAllNamed(AppPages.login);
+        emailForgotPassword.clear();
       }
     } catch (e) {
       EasyLoading.dismiss();
-      EasyLoading.showError(e.toString());
+
+      // Menangani kesalahan spesifik Firebase
+      if (e is FirebaseAuthException) {
+        if (e.code == 'user-not-found') {
+          cprint("Email tidak ditemukan di Firebase.");
+          EasyLoading.showError('Email tidak terdaftar. Silakan coba lagi.');
+        } else if (e.code == 'invalid-email') {
+          cprint("Format email tidak valid.");
+          EasyLoading.showError('Format email tidak valid.');
+        } else {
+          cprint("Kesalahan Firebase lainnya: ${e.message}");
+          EasyLoading.showError('Terjadi kesalahan: ${e.message}');
+        }
+      } else {
+        cprint("Kesalahan tidak dikenal: $e");
+        EasyLoading.showError('Terjadi kesalahan. Silakan coba lagi.');
+      }
     } finally {
       EasyLoading.dismiss();
     }
