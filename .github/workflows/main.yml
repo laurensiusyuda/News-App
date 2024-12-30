@@ -31,6 +31,15 @@ jobs:
       with:
         api-lavels: 35
         build-tools: 35.0.0
+      
+    - name: Setup ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0'
+        bundler-cache: true
+
+    - name: Install Linux SDK
+      run: gem update && gem install build-essential gdb cmake
 
     - name: Accept Android Licenses
       run: yes | sdkmanager --licenses
@@ -41,11 +50,8 @@ jobs:
     - name: Get Dependencies
       run: flutter pub get
 
-
-    - name: Build APK
-      run: |
-        flutter clean
-        flutter build apk
+    # - name: Build APK
+    #   run: flutter build apk
 
     # - name: Uploud APK
     #   uses: actions/upload-artifact@v4
@@ -67,11 +73,6 @@ jobs:
     #     export PATH="$PATH":"$HOME/.pub-cache/bin"
     #     flutterfire configure --project=${{secret.FIREBASE_PROJECT_ID}}
 
-    # - name: Setup ruby
-    #   uses: ruby/setup-ruby@v1
-    #   with:
-    #     ruby-version: '3.0'
-    #     bundler-cache: true
 
     - name: Setup fastlane
       run: gem install fastlane
