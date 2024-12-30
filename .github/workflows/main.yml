@@ -63,8 +63,8 @@ jobs:
     #sebelum memulai fastlane pastikan aplikasi sudah terdaftar di firebase
     #daftarkan project ke firebase
 
-    - name: Install flutterfire
-      run : dart pub global activate flutterfire_cli
+    # - name: Install flutterfire
+    #   run : dart pub global activate flutterfire_cli
 
     # - name: Configure flutterfire
     #   env:
@@ -75,14 +75,12 @@ jobs:
 
 
     - name: Setup fastlane
-      run: gem install fastlane
+      uses: maierj/fastlane-action@v3.1.0
+      with:
+        lane: 'test'
 
-    - run: |
-        cd android
-        pwd
-        fastlane init
-        fastlane add_plugin firebase_app_distribution
-        pwd
+    - name: fastlane to firebase
+      run: fastlane add_plugin firebase_app_distribution
 
     # - name: setup firebase
     #   run: curl sL https://firebase.tools | bash
