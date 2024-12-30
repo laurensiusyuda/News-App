@@ -75,16 +75,10 @@ jobs:
 
 
     - name: Setup fastlane
-      run: gem install fastlane
-      
-    - run: |
-        cd android
-        pwd
+      run: |
+        gem install fastlane
         fastlane init
-        cd ..
-        pwd
-
-    - run: fastlane add_plugin firebase_app_distribution
+        fastlane add_plugin firebase_app_distribution
 
     # - name: setup firebase
     #   run: curl sL https://firebase.tools | bash
