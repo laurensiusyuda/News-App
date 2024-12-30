@@ -39,7 +39,7 @@ jobs:
         bundler-cache: true
 
     - name: Install Linux SDK
-      run: apt install build-essential gdb cmake
+      run: sudo apt install build-essential gdb cmake
 
     - name: Accept Android Licenses
       run: yes | sdkmanager --licenses
