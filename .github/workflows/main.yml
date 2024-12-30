@@ -1,0 +1,92 @@
+name: CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - cicd-fastlane
+
+jobs:
+  flutter-setup:
+    name: Setup Flutter
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Setup JDK
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with: 
+        flutter-version: '3.27.0'
+        channel: 'stable'
+
+    - name: Install Android SDK
+      uses: android-actions/setup-android@v2
+      with:
+        api-lavels: 35
+        build-tools: 35.0.0
+
+    - name: Accept Android Licenses
+      run: yes | sdkmanager --licenses
+
+    - name: Checking Flutter
+      run: flutter doctor
+
+    - name: Get Dependencies
+      run: flutter pub get
+
+
+    - name: Build APK
+      run: |
+        flutter clean
+        flutter build apk
+
+    # - name: Uploud APK
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: Android APK
+    #     path: build/app/outputs/flutter-apk/app-release.apk
+    #     if-no-files-found: error
+      
+    #sebelum memulai fastlane pastikan aplikasi sudah terdaftar di firebase
+    #daftarkan project ke firebase
+
+    - name: Install flutterfire
+      run : dart pub global activate flutterfire_cli
+
+    # - name: Configure flutterfire
+    #   env:
+    #     GOOGLE_APPLICATION_CREDENTIALS: ${{secret.FIREBASE_CREDENTIALS}}
+    #   run: |
+    #     export PATH="$PATH":"$HOME/.pub-cache/bin"
+    #     flutterfire configure --project=${{secret.FIREBASE_PROJECT_ID}}
+
+    # - name: Setup ruby
+    #   uses: ruby/setup-ruby@v1
+    #   with:
+    #     ruby-version: '3.0'
+    #     bundler-cache: true
+
+    - name: Setup fastlane
+      run: gem install fastlane
+      
+    - run: |
+        cd android
+        pwd
+        fastlane init
+        cd ..
+        pwd
+
+    - run: fastlane add_plugin firebase_app_distribution
+
+    # - name: setup firebase
+    #   run: curl sL https://firebase.tools | bash
+
+    # - name: Auth with Service Account
+    #   run: firebase projects:list --token ${{secrets.FIREBASE_TOKEN}}
