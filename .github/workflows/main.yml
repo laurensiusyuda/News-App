@@ -77,7 +77,7 @@ jobs:
     - name: Setup fastlane
       uses: maierj/fastlane-action@v3.1.0
       with:
-        lane: 'test'
+        lane: 'android test'
 
     - name: fastlane to firebase
       run: fastlane add_plugin firebase_app_distribution
