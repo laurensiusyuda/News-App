@@ -32,11 +32,6 @@ jobs:
         api-lavels: 35
         build-tools: 35.0.0
       
-    - name: Setup ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.0'
-        bundler-cache: true
 
     - name: Install Linux SDK
       run: sudo apt install build-essential gdb cmake
@@ -73,6 +68,11 @@ jobs:
     #     export PATH="$PATH":"$HOME/.pub-cache/bin"
     #     flutterfire configure --project=${{secret.FIREBASE_PROJECT_ID}}
 
+    - name: Setup ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0'
+        bundler-cache: true
 
     - name: Setup fastlane
       uses: maierj/fastlane-action@v3.1.0
