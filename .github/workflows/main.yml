@@ -47,8 +47,8 @@ jobs:
         flutter clean
         flutter pub get
 
-    - name: Build APK
-      run: flutter build apk --stacktrace
+    # - name: Build APK
+    #   run: flutter build apk
 
     # - name: Uploud APK
     #   uses: actions/upload-artifact@v4
@@ -89,12 +89,13 @@ jobs:
         sudo bundle install
         bundle exec fastlane string_test
 
+    - run : firebase projects:list
+
     - name: fastlane to firebase
       run: |
         pwd
         fastlane add_plugin firebase_app_distribution
 
-    - run : firebase projects:list
     
     # - name: setup firebase
     #   run: curl sL https://firebase.tools | bash
