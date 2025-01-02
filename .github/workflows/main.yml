@@ -76,7 +76,7 @@ jobs:
         ruby-version: '3.0'
         bundler-cache: true
 
-#project sudah di inisialisasi dengan fastlane init
+#project sudah di inisialisasi dengan fastlane init didalam 
     
     - name: start fastlane
       run: |
@@ -84,7 +84,11 @@ jobs:
         bundle install
         bundle exec fastlane string_test
 
-    - run : firebase projects:list
+    - name: Setup firebase
+      run : |
+        npm install -g firebase-tools
+        firebase login:ci
+        firebase projects:list
 
     - name: fastlane to firebase
       run: |
