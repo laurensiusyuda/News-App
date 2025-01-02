@@ -85,7 +85,7 @@ jobs:
       run: |
         cd android
         bundle install
-        bundle exec fastlane test
+        bundle exec fastlane string_test
 
     - name: fastlane to firebase
       run: fastlane add_plugin firebase_app_distribution
