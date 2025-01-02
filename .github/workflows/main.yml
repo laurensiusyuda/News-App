@@ -78,11 +78,6 @@ jobs:
 
 #project sudah di inisialisasi dengan fastlane init didalam 
     
-    - name: start fastlane
-      run: |
-        cd android
-        bundle install
-        bundle exec fastlane string_test
 
     - name: Setup firebase
       run : |
@@ -92,4 +87,10 @@ jobs:
     - name: fastlane to firebase
       run: |
         pwd
-        fastlane add_plugin firebase_app_distribution --token "$secrets.FIREBASE_TOKEN"
+        fastlane add_plugin firebase_app_distribution
+
+    - name: start fastlane
+      run: |
+        cd android
+        bundle install
+        bundle exec fastlane distribute
