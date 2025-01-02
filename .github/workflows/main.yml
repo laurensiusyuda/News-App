@@ -45,8 +45,8 @@ jobs:
     - name: Get Dependencies
       run: flutter pub get
 
-    # - name: Build APK
-    #   run: flutter build apk
+    - name: Build APK
+      run: flutter build apk
 
     # - name: Uploud APK
     #   uses: actions/upload-artifact@v4
@@ -84,11 +84,13 @@ jobs:
     - name: start fastlane
       run: |
         cd android
-        bundle install
+        sudo bundle install
         bundle exec fastlane string_test
 
     - name: fastlane to firebase
-      run: fastlane add_plugin firebase_app_distribution
+      run: |
+        pwd
+        fastlane add_plugin firebase_app_distribution
 
     # - name: setup firebase
     #   run: curl sL https://firebase.tools | bash
