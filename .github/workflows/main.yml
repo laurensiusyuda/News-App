@@ -88,7 +88,7 @@ jobs:
     #   run: |
     #     pwd
     #     cd android
-    #     fastlane add_plugin firebase_app_distribution
+    #     fastlane add_plugin firebase_app_distribution -y
 
 
     - name: start fastlane
