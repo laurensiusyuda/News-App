@@ -76,17 +76,12 @@ jobs:
         ruby-version: '3.0'
         bundler-cache: true
 
-    # - name: Setup fastlane
-    #   uses: maierj/fastlane-action@v3.1.0
-    #   with:
-    #     lane: 'test'
-
 #project sudah di inisialisasi dengan fastlane init
     
     - name: start fastlane
       run: |
         cd android
-        sudo bundle install
+        bundle install
         bundle exec fastlane string_test
 
     - run : firebase projects:list
