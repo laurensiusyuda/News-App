@@ -87,8 +87,7 @@ jobs:
     - name: Setup firebase
       run : |
         npm install -g firebase-tools
-        firebase login:ci
-        firebase projects:list
+        firebase projects:list --token $Firebase_Token
 
     - name: fastlane to firebase
       run: |
