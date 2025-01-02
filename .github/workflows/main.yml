@@ -43,7 +43,9 @@ jobs:
       run: flutter doctor
 
     - name: Get Dependencies
-      run: flutter pub get
+      run: |
+        flutter clean
+        flutter pub get
 
     - name: Build APK
       run: flutter build apk
@@ -92,6 +94,8 @@ jobs:
         pwd
         fastlane add_plugin firebase_app_distribution
 
+    - run : firebase projects:list
+    
     # - name: setup firebase
     #   run: curl sL https://firebase.tools | bash
 
