@@ -35,4 +35,5 @@ platform :android do
     puts "Version Name"
     puts "Version Code"
     puts "Version ID"
+  end
 end
