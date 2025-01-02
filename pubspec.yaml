@@ -51,6 +51,7 @@ dependencies:
   easy_loading_button: ^0.3.2
   dio: ^5.7.0
   sidebarx: ^0.17.1
+  mocktail: ^1.0.4
 
 dev_dependencies:
   flutter_test:
