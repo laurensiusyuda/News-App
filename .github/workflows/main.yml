@@ -84,14 +84,9 @@ jobs:
         npm install -g firebase-tools
         # firebase projects:list --token "$secrets.FIREBASE_TOKEN"
 
-    - name: fastlane to firebase
-      run: |
-        cd android
-        gem install fastlane-plugin-firebase_app_distribution
-
-
     - name: start fastlane
       run: |
         cd android
+        gem install fastlane-plugin-firebase_app_distribution
         bundle install
         bundle exec fastlane distribute
