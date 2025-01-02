@@ -39,8 +39,8 @@ jobs:
     - name: Accept Android Licenses
       run: yes | sdkmanager --licenses
 
-    - name: Checking Flutter
-      run: flutter doctor
+    # - name: Checking Flutter
+    #   run: flutter doctor
 
     - name: Get Dependencies
       run: |
