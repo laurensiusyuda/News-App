@@ -48,7 +48,7 @@ jobs:
         flutter pub get
 
     - name: Build APK
-      run: flutter build apk --release
+      run: flutter build apk
 
     # - name: Uploud APK
     #   uses: actions/upload-artifact@v4
@@ -82,7 +82,7 @@ jobs:
     - name: Setup firebase
       run : |
         npm install -g firebase-tools
-        
+
 # firebase projects:list --token "$secrets.FIREBASE_TOKEN"
 
     - name: start fastlane
