@@ -31,6 +31,10 @@ class AppRoutes {
     GetPage(
       name: _Paths.forgotpassword,
       page: () => const ForgotPasswordScreen(),
+    ),
+    GetPage(
+      name: _Paths.bookmarks,
+      page: () => const BookMarksScreen(),
     )
   ];
 }

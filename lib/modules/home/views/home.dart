@@ -1,10 +1,10 @@
 import 'package:dummy_project_1/modules/auth/controllers/auth_controller.dart';
 import 'package:dummy_project_1/modules/home/controllers/home_controller.dart';
 import 'package:dummy_project_1/widget/card.dart';
+import 'package:dummy_project_1/widget/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sidebarx/sidebarx.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,13 +13,19 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthController controller = Get.find();
     final HomeController controllerHome = Get.put(HomeController());
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text(
+          title: Text(
             "Halaman HomePage",
+            style: GoogleFonts.nunito(
+              textStyle: const TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
           ),
           actions: [
             IconButton(
@@ -32,10 +38,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-        drawer: SidebarX(
-          controller: SidebarXController(selectedIndex: 0, extended: false),
-        ),
-        // ! body page
+        drawer: const CustomDrawer(),
         body: Obx(
           () {
             if (controllerHome.isLoading.value) {
@@ -63,7 +66,6 @@ class HomeScreen extends StatelessWidget {
               child: ListView.builder(
                 // * MENAMPILKAN SEMUA ITEM
                 // itemCount: controllerHome.newsData.value!.articles!.length,
-
                 // * MENAMPILKAN ITEM YANG HANYA MEMILIKI IMAGE
                 itemCount: controllerHome.newsData.value?.articles
                         ?.where((article) => article.urlToImage != null)

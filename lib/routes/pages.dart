@@ -2,6 +2,7 @@ import 'package:dummy_project_1/modules/auth/views/checkemailverifyscreen.dart';
 import 'package:dummy_project_1/modules/auth/views/forgotpasswordscreen.dart';
 import 'package:dummy_project_1/modules/auth/views/loginscreen.dart';
 import 'package:dummy_project_1/modules/auth/views/registerscreen.dart';
+import 'package:dummy_project_1/modules/bookmarks/views/bookmark.dart';
 import 'package:dummy_project_1/modules/home/views/home.dart';
 import 'package:dummy_project_1/modules/splash/views/onboardscreen.dart';
 import 'package:dummy_project_1/modules/splash/views/splashscreen.dart';
@@ -18,6 +19,7 @@ abstract class _Paths {
   static const onboard = '/onboard';
   static const emailverify = '/emailverify';
   static const forgotpassword = '/forgotpassword';
+  static const bookmarks = '/bookmarks';
 }
 
 class AppPages {
@@ -28,4 +30,5 @@ class AppPages {
   static const onboard = _Paths.onboard;
   static const emailverify = _Paths.emailverify;
   static const forgotpassword = _Paths.forgotpassword;
+  static const bookmarks = _Paths.bookmarks;
 }
