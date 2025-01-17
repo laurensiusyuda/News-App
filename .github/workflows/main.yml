@@ -50,12 +50,12 @@ jobs:
     - name: Build APK
       run: flutter build apk
 
-    # - name: Uploud APK
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: Android APK
-    #     path: build/app/outputs/flutter-apk/app-release.apk
-    #     if-no-files-found: error
+    - name: Uploud APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: Android APK
+        path: build/app/outputs/flutter-apk/app-release.apk
+        if-no-files-found: error
       
     #sebelum memulai fastlane pastikan aplikasi sudah terdaftar di firebase
     #daftarkan project ke firebase
@@ -76,7 +76,7 @@ jobs:
         ruby-version: '3.0'
         bundler-cache: true
 
-#project sudah di inisialisasi dengan fastlane init didalam 
+#project sudah di inisialisasi dengan fastlane init didalam direktori android/ios
     
 
     - name: Setup firebase
@@ -84,6 +84,8 @@ jobs:
         npm install -g firebase-tools
 
 # firebase projects:list --token "$secrets.FIREBASE_TOKEN"
+
+# login firebase secara manual menggunakan ui interaktif
 
     - name: start fastlane
       run: |
