@@ -12,9 +12,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Grant permission
-      run: chmod +x android/gradlew
 
     - name: Setup JDK
       uses: actions/setup-java@v3
