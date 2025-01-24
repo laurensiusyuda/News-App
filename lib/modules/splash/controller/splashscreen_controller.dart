@@ -14,12 +14,12 @@ class SplashScreenController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? seenOnBoard = prefs.getBool('seenOnboard');
     if (seenOnBoard == null || seenOnBoard == false) {
-      Get.offNamed(AppPages.onboard);
+      Get.offNamed(AppPages.onboardScreen);
     } else {
       Future.delayed(
         const Duration(seconds: 3),
         () {
-          Get.offNamed(AppPages.login);
+          Get.offNamed(AppPages.loginScreen);
         },
       );
     }
@@ -29,6 +29,6 @@ class SplashScreenController extends GetxController {
   Future<void> completeOnBoard() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('seenOnboard', true);
-    Get.offAllNamed(AppPages.login);
+    Get.offAllNamed(AppPages.loginScreen);
   }
 }

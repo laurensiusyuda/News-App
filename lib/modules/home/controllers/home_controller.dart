@@ -15,7 +15,6 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Panggil loadBookmarks() saat inisialisasi
     loadBookmarks();
     getDataTopHeadlines();
   }
@@ -57,16 +56,14 @@ class HomeController extends GetxController {
       bookmarkedArticles.add(title);
     }
     await saveBookmarks();
-    // Reload bookmarks setelah perubahan
     await loadBookmarks();
   }
 
-  // Check if article is bookmarked
   bool isBookmarked(String title) {
     return bookmarkedArticles.contains(title);
   }
 
-  // Optional: tambahkan method untuk membersihkan bookmark saat logout
+  // ! masih belum di pakai karena mempertimbangkan jika logout apakah perlu untuk clear bookmarks
   Future<void> clearBookmarks() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(bookmarkkey);

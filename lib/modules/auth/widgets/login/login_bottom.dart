@@ -17,7 +17,7 @@ class LoginBottom extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
               onTap: () {
-                Get.toNamed(AppPages.register);
+                Get.toNamed(AppPages.registerScreen);
               },
               child: Text(
                 'Belum Memiliki Akun ?',

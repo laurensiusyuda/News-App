@@ -54,7 +54,7 @@ class AuthController extends GetxController {
           EasyLoading.dismiss();
           EasyLoading.showSuccess('Registrasi berhasil');
           Get.offAllNamed(
-            AppPages.emailverify,
+            AppPages.emailverifyScreen,
           );
           emailRegisterFC.clear();
           passwordRegisterFc.clear();
@@ -108,7 +108,7 @@ class AuthController extends GetxController {
         Future.delayed(
           const Duration(seconds: 2),
           () {
-            Get.offAllNamed(AppPages.home);
+            Get.offAllNamed(AppPages.homeScreen);
           },
         );
       } else {
@@ -142,7 +142,7 @@ class AuthController extends GetxController {
             duration: const Duration(seconds: 2));
 
         // Mengalihkan pengguna kembali ke halaman login
-        Get.offAllNamed(AppPages.login);
+        Get.offAllNamed(AppPages.loginScreen);
         emailForgotPassword.clear();
       }
     } catch (e) {
@@ -183,7 +183,7 @@ class AuthController extends GetxController {
           'Login Berhasil',
           duration: const Duration(seconds: 2),
         );
-        Get.offAllNamed(AppPages.home);
+        Get.offAllNamed(AppPages.homeScreen);
         emailFC.clear();
         passwordFC.clear();
       }
@@ -218,7 +218,7 @@ class AuthController extends GetxController {
         assert(await user.getIdToken() != null);
         final User? currentUser = auth.currentUser;
         assert(user.uid == currentUser?.uid);
-        Get.toNamed(AppPages.home);
+        Get.toNamed(AppPages.homeScreen);
       }
       return user;
     } catch (e) {
@@ -234,7 +234,7 @@ class AuthController extends GetxController {
       EasyLoading.show(status: "Logging out...");
       Future.delayed(const Duration(seconds: 2), () {
         EasyLoading.dismiss();
-        Get.offAllNamed(AppPages.login);
+        Get.offAllNamed(AppPages.loginScreen);
       });
     } catch (error) {
       cprint('Error logging out: $error');

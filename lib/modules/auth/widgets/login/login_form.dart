@@ -63,7 +63,7 @@ class LoginForm extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  Get.toNamed(AppPages.forgotpassword);
+                  Get.toNamed(AppPages.forgotpasswordScreen);
                 },
                 child: Text(
                   'Lupa Password',

@@ -55,14 +55,14 @@ class CustomDrawer extends StatelessWidget {
           label: 'Home',
           icon: Icons.home,
           onTap: () {
-            Get.offNamed(AppPages.home);
+            Get.offNamed(AppPages.homeScreen);
           },
         ),
         SidebarXItem(
           icon: Icons.bookmark,
           label: 'Bookmarks Item',
           onTap: () {
-            Get.offNamed(AppPages.bookmarks);
+            Get.offNamed(AppPages.bookmarkScreen);
           },
         ),
       ],

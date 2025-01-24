@@ -25,7 +25,7 @@ class ListCardWidget extends StatelessWidget {
     final HomeController controller = Get.find();
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(6.0),
       child: Card(
         margin: const EdgeInsets.all(10),
         shape: RoundedRectangleBorder(
@@ -33,7 +33,7 @@ class ListCardWidget extends StatelessWidget {
         ),
         elevation: elevation,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Stack(
               children: [
@@ -112,6 +112,7 @@ class ListCardWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,

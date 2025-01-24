@@ -64,9 +64,9 @@ class _OnBoardScrennState extends State<OnBoardScreen> {
       ],
       onDone: () => {
         splashController.completeOnBoard(),
-        Get.toNamed(AppPages.login),
+        Get.toNamed(AppPages.loginScreen),
       },
-      onSkip: () => Get.toNamed(AppPages.login),
+      onSkip: () => Get.toNamed(AppPages.loginScreen),
       showSkipButton: true,
       showBackButton: false,
       skipOrBackFlex: 0,

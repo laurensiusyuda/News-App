@@ -16,17 +16,6 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            "Halaman HomePage",
-            style: GoogleFonts.nunito(
-              textStyle: const TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
           actions: [
             IconButton(
               onPressed: () {
@@ -63,33 +52,59 @@ class HomeScreen extends StatelessWidget {
               onRefresh: () async {
                 await controllerHome.getDataTopHeadlines();
               },
-              child: ListView.builder(
-                // * MENAMPILKAN SEMUA ITEM
-                // itemCount: controllerHome.newsData.value!.articles!.length,
-                // * MENAMPILKAN ITEM YANG HANYA MEMILIKI IMAGE
-                itemCount: controllerHome.newsData.value?.articles
-                        ?.where((article) => article.urlToImage != null)
-                        .length ??
-                    0,
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'Berita Terkini',
+                        style: GoogleFonts.nunito(
+                          textStyle: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: controllerHome.newsData.value?.articles
+                              ?.where((article) => article.urlToImage != null)
+                              .length ??
+                          0,
+                      itemBuilder: (context, index) {
+                        final filteredArticles = controllerHome
+                            .newsData.value?.articles!
+                            .where((article) => article.urlToImage != null)
+                            .toList();
 
-                itemBuilder: (context, index) {
-                  final filteredArticles = controllerHome
-                      .newsData.value?.articles!
-                      .where((article) => article.urlToImage != null)
-                      .toList();
+                        if (filteredArticles == null ||
+                            filteredArticles.isEmpty) {
+                          return const SizedBox.shrink();
+                        }
 
-                  if (filteredArticles == null || filteredArticles.isEmpty) {
-                    return const SizedBox.shrink();
-                  }
+                        final article = filteredArticles[index];
 
-                  final article = filteredArticles[index];
-
-                  return ListCardWidget(
-                    urlImage: '${article.urlToImage}',
-                    title: '${article.title}',
-                    description: '${article.description}',
-                  );
-                },
+                        return ListCardWidget(
+                          urlImage: '${article.urlToImage}',
+                          title: '${article.title}',
+                          description: '${article.description}',
+                        );
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: const Text('Lihat Lebih Banyak'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           },

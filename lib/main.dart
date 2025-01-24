@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       title: 'NewsApp',
       initialRoute: FirebaseAuth.instance.currentUser == null
           ? AppRoutes.initial
-          : AppPages.home,
+          : AppPages.homeScreen,
       getPages: AppRoutes.pages,
       builder: EasyLoading.init(),
     );
