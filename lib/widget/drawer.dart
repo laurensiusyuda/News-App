@@ -8,10 +8,38 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String currentRoute = Get.currentRoute;
+    final String? arguments = Get.arguments as String?;
+
+    int getInitialIndex() {
+      if (currentRoute == AppPages.homeScreen) return 0;
+      if (currentRoute == AppPages.bookmarkScreen) {
+        if (arguments == 'trending_news') return 1;
+        if (arguments == 'category_news') return 2;
+      }
+      return 0;
+    }
+
     final SidebarXController sidebarController = SidebarXController(
-      selectedIndex: 0,
+      selectedIndex: getInitialIndex(),
       extended: false,
     );
+
+    void navigateToScreen(String route, [String? arguments]) {
+      // Close drawer first
+      if (Scaffold.of(context).isDrawerOpen) {
+        Navigator.of(context).pop();
+      }
+
+      // Then navigate
+      Future.delayed(const Duration(milliseconds: 100), () {
+        Get.offAllNamed(
+          route,
+          arguments: arguments,
+        );
+      });
+    }
+
     return SidebarX(
       controller: sidebarController,
       theme: SidebarXTheme(
@@ -54,16 +82,19 @@ class CustomDrawer extends StatelessWidget {
         SidebarXItem(
           label: 'Home',
           icon: Icons.home,
-          onTap: () {
-            Get.offNamed(AppPages.homeScreen);
-          },
+          onTap: () => navigateToScreen(AppPages.homeScreen),
         ),
         SidebarXItem(
           icon: Icons.bookmark,
-          label: 'Bookmarks Item',
-          onTap: () {
-            Get.offNamed(AppPages.bookmarkScreen);
-          },
+          label: 'Bookmarks Trending News',
+          onTap: () =>
+              navigateToScreen(AppPages.bookmarkScreen, 'trending_news'),
+        ),
+        SidebarXItem(
+          icon: Icons.bookmark,
+          label: 'Bookmarks By Category News',
+          onTap: () =>
+              navigateToScreen(AppPages.bookmarkScreen, 'category_news'),
         ),
       ],
     );
