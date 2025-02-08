@@ -52,6 +52,7 @@ dependencies:
   dio: ^5.7.0
   sidebarx: ^0.17.1
   mocktail: ^1.0.4
+  smooth_page_indicator: ^1.2.0+3
 
 dev_dependencies:
   flutter_test:
